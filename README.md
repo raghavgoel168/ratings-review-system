@@ -20,10 +20,11 @@ A full-stack web application for users to rate and review products with optional
 ```plaintext
 project-root/
 ├── backend/
-│   └── server.js           # Express server with routes and DB integration
+│   ├── server.js           # Express server with routes and DB integration
+│   └── uploads/            # Folder for storing uploaded review images
 ├── db/
 │   └── schema.sql          # SQL script to create database and tables
-├── uploads/                # Folder for uploaded review images
+├── assets/                 # Folder for README images/screenshots
 ├── frontend/
 │   ├── index.html          # Product listing and rating summary page
 │   └── product.html        # Review and rating page for a single product
