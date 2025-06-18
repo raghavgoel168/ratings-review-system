@@ -55,6 +55,7 @@ This will:
 
 - Create users, products, and reviews tables
 
+
 ### 3. 🔐 Database Password Setup
 In `backend/server.js`, replace:
 ```bash
@@ -76,7 +77,7 @@ You should see:
 🚀 Server running at http://localhost:3000
 ```
 
-### 4. 🌐 Frontend Setup
+### 5. 🌐 Frontend Setup
 
 Open these files directly in your browser or serve using Live Server:
 
@@ -134,14 +135,23 @@ Ensure your backend is running at http://localhost:3000 .
 ## 📷 Screenshots
 
 ### 🏠 Home Page – Product Listing
-<<<<<<< HEAD
-![Home Page](./assets/ScreenShot1.png)
-=======
-![Home Page](./images/ScreenShot1.png)
->>>>>>> 33a974150e389db2efde88485298b9ce3f64e5d0
+
+<img src="./assets/ScreenShot1.png" alt="Home Page" width="500"/>
 
 ### 📄 Product Page – Submit Review
-![Product Page](./images/ScreenShot2.png)
+<img src="./assets/ScreenShot2.png" alt="Home Page" width="500"/>
+
+---
+
+## 🗂 ER Diagram
+
+Here’s the Entity Relationship Diagram (ERD) for the Ratings & Review System, which shows how users, products, and reviews are connected.
+
+<img src="./db/er-diagram.png" alt="ER Diagram" width="700"/>
+
+🔗 [ER Diagram Link]([https://your-public-link.com/er-diagram.png](https://dbdiagram.io/d/6852d174f039ec6d36d2282e))
+
+---
 
 ## 🧪 Testing Tips
 
