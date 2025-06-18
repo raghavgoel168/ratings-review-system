@@ -55,7 +55,14 @@ This will:
 
 - Create users, products, and reviews tables
 
-### 3. 🚀 Start the Backend Server
+### 3. 🔐 Database Password Setup
+In `backend/server.js`, replace:
+```bash
+password: 'enter_password',
+```
+with your actual MySQL root password before running the server.
+
+### 4. 🚀 Start the Backend Server
 
 ```bash
 cd backend
@@ -73,8 +80,8 @@ You should see:
 
 Open these files directly in your browser or serve using Live Server:
 
-- **frontend/index.html** : Lists all products and their ratings
-- **frontend/product.html?id=PRODUCT_ID** : Shows and allows posting reviews for a selected product
+- `frontend/index.html` : Lists all products and their ratings
+- `frontend/product.html?id=PRODUCT_ID` : Shows and allows posting reviews for a selected product
 
 Ensure your backend is running at http://localhost:3000 .
 
@@ -83,21 +90,15 @@ Ensure your backend is running at http://localhost:3000 .
 ## 🧪 API Endpoints
 
 - Products
-  ```bash
-  GET /api/products
-  ```
-  Get all products.
+  
+  `GET /api/products`  -> Get all products.
+  
 
 - Reviews
-  ```bash
-  GET /api/products/:id/reviews
-  ```
-  Get all reviews for a product.
+  
+  `GET /api/products/:id/reviews`  -> Get all reviews for a product.
 
-  ```bash
-  POST /api/reviews
-  ```
-  Submit a review.
+  `POST /api/reviews`  -> Submit a review.
 
   **Request Body (JSON):**
   
@@ -111,23 +112,15 @@ Ensure your backend is running at http://localhost:3000 .
   }
   ```
 
-  ```bash
-  GET /api/products/:id/rating
-  ```
-  Returns average rating and total number of reviews.
+  `GET /api/products/:id/rating`  -> Returns average rating and total number of reviews.
 
 - Tags
   
-  ```bash
-  GET /api/products/:id/tags
-  ```
-  Returns top 5 keywords from reviews for the product.
+  `GET /api/products/:id/tags`  -> Returns top 5 keywords from reviews for the product.
 
 - Upload Image
 
-  `POST /api/upload`
-  
-  Upload image using **multipart/form-data**.
+  `POST /api/upload`  -> Upload image using 'multipart/form-data'.
 
   Form field: image
   **Returns:**
