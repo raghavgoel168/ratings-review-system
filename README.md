@@ -133,6 +133,12 @@ Ensure your backend is running at http://localhost:3000 .
 
 ## 📷 Screenshots
 
+### 🏠 Home Page – Product Listing
+![Home Page](./assets/ScreenShot.png)
+
+### 📄 Product Page – Submit Review
+![Product Page](./assets/demo2.png)
+
 ## 🧪 Testing Tips
 
 - Open `index.html` and click on a product to view or post reviews.
@@ -175,5 +181,3 @@ Ensure your backend is running at http://localhost:3000 .
 **Raghav Goel**  
 📧 [raghavgoel168@gmail.com](mailto:raghavgoel168@gmail.com)  
 🔗 [LinkedIn](https://www.linkedin.com/in/raghavgoel29)  
-
-
