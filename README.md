@@ -134,7 +134,11 @@ Ensure your backend is running at http://localhost:3000 .
 ## 📷 Screenshots
 
 ### 🏠 Home Page – Product Listing
+<<<<<<< HEAD
 ![Home Page](./assets/ScreenShot.png)
+=======
+![Home Page](./images/ScreenShot.png)
+>>>>>>> 33a974150e389db2efde88485298b9ce3f64e5d0
 
 ### 📄 Product Page – Submit Review
 ![Product Page](./assets/demo2.png)
