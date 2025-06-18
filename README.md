@@ -150,7 +150,7 @@ Here’s the Entity Relationship Diagram (ERD) for the Ratings & Review System, 
 
 <img src="./db/er-diagram.png" alt="ER Diagram" width="700"/>
 
-🔗 [ER Diagram Link]([https://your-public-link.com/er-diagram.png](https://dbdiagram.io/d/6852d174f039ec6d36d2282e))
+🔗 [ER Diagram Link](https://your-public-link.com/er-diagram.png](https://dbdiagram.io/d/6852d174f039ec6d36d2282e)
 
 ---
 
