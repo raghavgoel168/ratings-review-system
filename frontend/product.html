@@ -42,7 +42,7 @@
     p {
       margin-bottom: 15px;
       color: #555;
-      font-size: 1.9em
+      font-size: 1.5em;
     }
 
     strong {
@@ -51,44 +51,67 @@
 
     #reviewsContainer {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
       padding: 15px;
     }
 
     .review {
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      transition: transform 0.2s ease;
+      cursor: default;
+      font-size: 1.05em;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      gap: 10px;
+      color: #2f2f2f;
+    }
+
+    .review:hover {
+      transform: scale(1.02);
     }
 
     .review strong {
-      font-size: 1.1em;
-      display: block;
+      font-size: 1.3em;
+      color: #2c3e50;
+      font-weight: 600;
       margin-bottom: 5px;
-      color: #333;
+    }
+
+    .review .rating-text {
+      font-size: 1.1em;
+      font-weight: 500;
+      color: #f39c12;
+    }
+
+    .review .review-text {
+      font-style: italic;
+      color: #444;
+      line-height: 1.5;
+      white-space: pre-wrap;
     }
 
     .review img {
-      max-width: 100%;
-      height: auto;
       margin-top: 10px;
-      border-radius: 4px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      max-height: 200px;
       object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
 
+    .review img:hover {
+      transform: scale(1.05);
+    }
 
     .review small {
-      color: #777;
-      display: block;
-      margin-top: 8px;
       font-size: 0.9em;
+      color: #888;
+      margin-top: 10px;
     }
 
     .form-group {
@@ -140,13 +163,11 @@
     #averageRating {
       font-weight: bold;
       color: #007bff;
-      /* font-size: 1.9em; */
     }
 
     #topTags {
       font-weight: bold;
       color: #f8753d;
-      /* font-size: 1.9em; */
     }
 
     #reviewsContainer:empty::before {
@@ -164,20 +185,29 @@
       color: #777;
       padding: 20px;
     }
-    /* #reviewForm {
+
+    .grid-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
 
-    #reviewForm .form-group {
-      display: flex;
-      flex-direction: column;
-    } */
-    .grid-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+    /* Modal */
+    #imageModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #modalImage {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -220,6 +250,11 @@
     </form>
   </div>
 
+  <!-- Modal for Image -->
+  <div id="imageModal">
+    <img id="modalImage" src="" />
+  </div>
+
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
@@ -232,7 +267,6 @@
         const product = products.find(p => p.id == productId);
         document.getElementById('productName').innerText = product?.name || 'Product';
       } catch (error) {
-        console.error("Product fetch error:", error);
         document.getElementById('productName').innerText = 'Product Info Error';
       }
     };
@@ -243,7 +277,6 @@
         const data = await res.json();
         document.getElementById('averageRating').innerText = `${data.average_rating || 'No ratings yet'} (${data.total_reviews} reviews)`;
       } catch (error) {
-        console.error("Rating fetch error:", error);
         document.getElementById('averageRating').innerText = 'Error';
       }
     };
@@ -254,7 +287,6 @@
         const data = await res.json();
         document.getElementById('topTags').innerText = data.tags?.length ? data.tags.join(', ') : 'No tags yet';
       } catch (error) {
-        console.error("Tag fetch error:", error);
         document.getElementById('topTags').innerText = 'Error';
       }
     };
@@ -266,22 +298,21 @@
         const res = await fetch(`http://localhost:3000/api/products/${productId}/reviews`);
         const reviews = await res.json();
         reviewsContainer.classList.remove('loading');
-
         if (!reviews.length) return;
 
         reviews.forEach(r => {
           const div = document.createElement('div');
           div.className = 'review';
           div.innerHTML = `
-            <strong>${r.username || 'Anonymous User'}</strong> - Rating: ${r.rating || 'N/A'}<br/>
-            ${r.review || ''}<br/>
-            ${r.image_url ? `<img src="${r.image_url}" alt="Review image" loading="lazy" />` : ''}
-            <small>${new Date(r.created_at).toLocaleString()}</small>
-          `;
+          <strong>${r.username || 'Anonymous User'}</strong>
+          <div class="rating-text">⭐ Rating: ${r.rating || 'N/A'}</div>
+          ${r.review ? `<div class="review-text">“${r.review}”</div>` : ''}
+          ${r.image_url ? `<img src="${r.image_url}" alt="Review image" loading="lazy" />` : ''}
+          <small>Posted on ${new Date(r.created_at).toLocaleString()}</small>
+        `;
           reviewsContainer.appendChild(div);
         });
       } catch (error) {
-        console.error("Review fetch error:", error);
         reviewsContainer.classList.remove('loading');
         reviewsContainer.innerText = 'Failed to load reviews.';
       }
@@ -290,7 +321,6 @@
     document.getElementById('reviewForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Clear errors
       document.getElementById('userIdError').innerText = '';
       document.getElementById('ratingError').innerText = '';
       document.getElementById('reviewTextError').innerText = '';
@@ -332,7 +362,6 @@
           const uploadData = await uploadRes.json();
           image_url = uploadData.imageUrl;
         } catch (uploadError) {
-          console.error("Image upload error:", uploadError);
           alert('Image upload failed.');
           return;
         }
@@ -355,8 +384,22 @@
           alert(result.error || 'Failed to submit review.');
         }
       } catch (error) {
-        console.error("Review submission error:", error);
         alert('Review submission failed.');
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+
+      if (e.target.tagName === 'IMG' && e.target.closest('.review')) {
+        modal.style.display = 'flex';
+        modalImg.src = e.target.src;
+      }
+
+      if (e.target.id === 'imageModal') {
+        modal.style.display = 'none';
+        modalImg.src = '';
       }
     });
 
