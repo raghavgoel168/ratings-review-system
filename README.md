@@ -78,6 +78,8 @@ Open these files directly in your browser or serve using Live Server:
 
 Ensure your backend is running at http://localhost:3000 .
 
+---
+
 ## 🧪 API Endpoints
 
 - Products
@@ -123,9 +125,8 @@ Ensure your backend is running at http://localhost:3000 .
 
 - Upload Image
 
-  ```bash
-  POST /api/upload
-  ```
+  `POST /api/upload`
+  
   Upload image using **multipart/form-data**.
 
   Form field: image
@@ -136,5 +137,50 @@ Ensure your backend is running at http://localhost:3000 .
   "imageUrl": "http://localhost:3000/uploads/<filename>.jpg"
   }
   ```
+
+## 📷 Screenshots
+
+## 🧪 Testing Tips
+
+- Open `index.html` and click on a product to view or post reviews.
+- Use tools like **Postman** to test endpoints manually.
+- Try uploading a review image and confirm it's stored under `/uploads/`.
+
+---
+
+## 🔐 Important Notes
+
+- ✅ One review **per product per user** is enforced in the database.
+- ✅ The server filters common stopwords like `"the"`, `"is"`, etc., while generating tags.
+- ✅ Review submission accepts **either a rating, a review, or both**.
+
+---
+
+## ✨ Features Summary
+
+- ✅ Product list with average ratings  
+- ✅ Review submission with optional image  
+- ✅ Unique review per user-product combo  
+- ✅ Keyword (tag) extraction from reviews  
+- ✅ Responsive API with error handling  
+- ✅ Image uploads via Multer  
+
+---
+
+## 📦 Future Enhancements
+
+- 🔐 User login/signup system  
+- 📃 Pagination for large review lists  
+- 🎨 UI design upgrades  
+- 🛠️ Admin panel for product management  
+- 🐳 Docker containerization  
+
+---
+
+## 👨‍💻 Author
+
+**Raghav Goel**  
+📧 [raghavgoel168@gmail.com](mailto:raghavgoel168@gmail.com)  
+🔗 [LinkedIn](https://www.linkedin.com/in/raghavgoel29)  
 
 
